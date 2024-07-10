@@ -1,172 +1,120 @@
 import 'package:flutter/material.dart';
 
 class ListePlanDeChantier extends StatelessWidget {
+  const ListePlanDeChantier({Key? key}) : super(key: key);
+
   @override
   Widget build(BuildContext context) {
-    return Column(
-      children: [
-        Container(
-          width: 360,
-          height: 800,
-          decoration: BoxDecoration(color: Colors.white),
-          child: Stack(
-            children: [
-              Positioned(
-                left: 143,
-                top: 11,
-                child: Text(
-                  'Plans',
-                  style: TextStyle(
-                    color: Colors.black,
-                    fontSize: 20,
-                    fontFamily: 'Inter',
-                    fontWeight: FontWeight.w600,
-                    height: 0,
-                  ),
-                ),
-              ),
-              Positioned(
-                left: 21,
-                top: 131,
-                child: Text(
-                  'Carte',
-                  style: TextStyle(
-                    color: Colors.black,
-                    fontSize: 20,
-                    fontFamily: 'Inter',
-                    fontWeight: FontWeight.w600,
-                    height: 0,
-                  ),
-                ),
-              ),
-              Positioned(
-                left: 21,
-                top: 400,
-                child: Text(
-                  'Plans',
-                  style: TextStyle(
-                    color: Colors.black,
-                    fontSize: 20,
-                    fontFamily: 'Inter',
-                    fontWeight: FontWeight.w600,
-                    height: 0,
-                  ),
-                ),
-              ),
-              Positioned(
-                left: 13,
-                top: 65,
-                child: Container(
-                  width: 337,
-                  height: 43,
-                  decoration: ShapeDecoration(
-                    color: Color(0xFFF5F5F5),
-                    shape: RoundedRectangleBorder(
-                      borderRadius: BorderRadius.circular(10),
-                    ),
-                  ),
-                ),
-              ),
-              Positioned(
-                left: 68,
-                top: 78,
-                child: Text(
-                  'Rechercher....',
-                  style: TextStyle(
-                    color: Color(0xFF918F8F),
-                    fontSize: 15,
-                    fontFamily: 'Inter',
-                    fontWeight: FontWeight.w700,
-                    height: 0,
-                  ),
-                ),
-              ),
-              Positioned(
-                left: 0,
-                top: 739,
-                child: Container(
-                  width: 360.02,
-                  decoration: ShapeDecoration(
-                    shape: RoundedRectangleBorder(
-                      side: BorderSide(
-                        width: 1,
-                        strokeAlign: BorderSide.strokeAlignCenter,
-                        color: Color(0xFFD9D9D9),
-                      ),
-                    ),
-                  ),
-                ),
-              ),
-              Positioned(
-                left: 23,
-                top: 178,
-                child: Container(
-                  width: 313,
-                  height: 195,
-                  decoration: ShapeDecoration(
-                    color: Color(0xFFD9D9D9),
-                    shape: RoundedRectangleBorder(
-                      borderRadius: BorderRadius.circular(10),
-                    ),
-                  ),
-                ),
-              ),
-              Positioned(
-                left: 52,
-                top: 562,
-                child: Text(
-                  'Ajouter votre premier dossier ou plan',
-                  style: TextStyle(
-                    color: Color(0xFF918F8F),
-                    fontSize: 14,
-                    fontFamily: 'Inter',
-                    fontWeight: FontWeight.w700,
-                    height: 0,
-                  ),
-                ),
-              ),
-              Positioned(
-                left: 91,
-                top: 640,
-                child: Container(
-                  width: 177,
-                  height: 37,
-                  decoration: ShapeDecoration(
-                    color: Color(0xB7C36107),
-                    shape: RoundedRectangleBorder(
-                      borderRadius: BorderRadius.circular(25),
-                    ),
-                  ),
-                ),
-              ),
-              Positioned(
-                left: 137,
-                top: 650,
-                child: Text(
-                  'Ajouter un plan',
-                  style: TextStyle(
-                    color: Colors.white,
-                    fontSize: 14,
-                    fontFamily: 'Inter',
-                    fontWeight: FontWeight.w700,
-                    height: 0,
-                  ),
-                ),
-              ),
-              Positioned(
-                left: 107,
-                top: 650,
-                child: Container(
-                  width: 20,
-                  height: 20,
-                  decoration: BoxDecoration(color: Color(0xB7C36107)),
-                  child: FlutterLogo(),
-                ),
-              ),
-            ],
+    return Scaffold(
+      backgroundColor: Colors.white,
+      appBar: AppBar(
+        title: const Center(
+          child: Text(
+            'Materiels',
+            style: TextStyle(
+              color: Colors.black,
+              fontSize: 20,
+              fontFamily: 'Inter',
+              fontWeight: FontWeight.w600,
+            ),
           ),
         ),
-      ],
+        backgroundColor: Colors.white,
+        elevation: 0,
+      ),
+      body: Column(
+        crossAxisAlignment: CrossAxisAlignment.start,
+        children: [
+          Padding(
+            padding: const EdgeInsets.symmetric(horizontal: 16.0),
+            child: TextField(
+              decoration: InputDecoration(
+                hintText: 'Rechercher...',
+                hintStyle: const TextStyle(
+                  color: Color(0xFF918F8F),
+                  fontSize: 15,
+                  fontFamily: 'Inter',
+                  fontWeight: FontWeight.w700,
+                ),
+                filled: true,
+                fillColor: const Color(0xFFF5F5F5),
+                border: OutlineInputBorder(
+                  borderRadius: BorderRadius.circular(10),
+                  borderSide: BorderSide.none,
+                ),
+              ),
+            ),
+          ),
+          const SizedBox(height: 20),
+          // On a retiré la section "Carte" ici
+          const SizedBox(height: 20),
+          const Padding(
+            padding: EdgeInsets.symmetric(horizontal: 21.0),
+            child: Text(
+              'Plans',
+              style: TextStyle(
+                color: Colors.black,
+                fontSize: 20,
+                fontFamily: 'Inter',
+                fontWeight: FontWeight.w600,
+              ),
+            ),
+          ),
+          const SizedBox(height: 16),
+          Expanded(
+            child: ListView.builder(
+              itemCount: 6, // Remplacez par le nombre réel d'éléments
+              itemBuilder: (context, index) {
+                return _buildListItem();
+              },
+            ),
+          ),
+          const SizedBox(height: 20),
+          Center(
+            child: ElevatedButton(
+              onPressed: () {},
+              style: ElevatedButton.styleFrom(
+                backgroundColor: const Color(0xB7C36107),
+                padding:
+                const EdgeInsets.symmetric(horizontal: 50, vertical: 15),
+                shape: RoundedRectangleBorder(
+                  borderRadius: BorderRadius.circular(25),
+                ),
+              ),
+              child: const Row(
+                mainAxisSize: MainAxisSize.min,
+                children: [
+                  Icon(Icons.add, color: Colors.white),
+                  SizedBox(width: 8),
+                  Text(
+                    'Ajouter du materiel',
+                    style: TextStyle(
+                      color: Colors.white,
+                      fontSize: 14,
+                      fontFamily: 'Inter',
+                      fontWeight: FontWeight.w700,
+                    ),
+                  ),
+                ],
+              ),
+            ),
+          ),
+          const SizedBox(height: 32),
+        ],
+      ),
+    );
+  }
+
+  Widget _buildListItem() {
+    return Container(
+      margin: const EdgeInsets.symmetric(horizontal: 21.0, vertical: 8.0),
+      height: 36,
+      decoration: ShapeDecoration(
+        color: const Color(0xFFD9D9D9),
+        shape: RoundedRectangleBorder(
+          borderRadius: BorderRadius.circular(10),
+        ),
+      ),
     );
   }
 }

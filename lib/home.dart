@@ -1,20 +1,43 @@
+import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
+import 'package:fluttertoast/fluttertoast.dart';
+import 'package:google_sign_in/google_sign_in.dart';
+import 'package:projet_flutter/dashbord.dart';
 
-class Home extends StatelessWidget {
+import 'FirstpageForConnection.dart';
+import 'liste_de_projet.dart';
+
+class Home extends StatefulWidget {
   const Home({Key? key}) : super(key: key);
+
+  @override
+  State<Home> createState() => _HomeState();
+}
+
+class _HomeState extends State<Home> {
+
+  Future<UserCredential> signInWithGoogle() async {
+    // Trigger the authentication flow
+    final GoogleSignInAccount? googleUser = await GoogleSignIn().signIn();
+
+    // Obtain the auth details from the request
+    final GoogleSignInAuthentication? googleAuth = await googleUser?.authentication;
+
+    // Create a new credential
+    final credential = GoogleAuthProvider.credential(
+      accessToken: googleAuth?.accessToken,
+      idToken: googleAuth?.idToken,
+    );
+
+    // Once signed in, return the UserCredential
+    return await FirebaseAuth.instance.signInWithCredential(credential);
+  }
 
   @override
   Widget build(BuildContext context) {
     return Scaffold(
       body: Stack(
         children: [
-          // Image de fond qui prend tout l'écran
-          Positioned.fill(
-            child: Image.asset(
-              'assets/votre_image_de_fond.jpg', // Remplacez par le chemin de votre image
-              fit: BoxFit.cover, // Ajuste l'image pour couvrir tout l'écran
-            ),
-          ),
           // Contenu centré sur l'image
           Center(
             child: Column(
@@ -27,7 +50,7 @@ class Home extends StatelessWidget {
                     fontSize: 24,
                     fontFamily: 'Inria Serif',
                     fontWeight: FontWeight.w400,
-                    color: Colors.white, // Couleur du texte pour le fond
+                    color: Colors.grey, // Couleur du texte pour le fond
                   ),
                 ),
                 const SizedBox(height: 16),
@@ -35,7 +58,7 @@ class Home extends StatelessWidget {
                   'Inscrivez vous gratuitement ou \nconnectez-vous',
                   textAlign: TextAlign.center,
                   style: TextStyle(
-                    color: Colors.white70, // Couleur du texte pour le fond
+                    color: Colors.grey, // Couleur du texte pour le fond
                     fontSize: 16,
                     fontFamily: 'Cairo',
                     fontWeight: FontWeight.w700,
@@ -43,8 +66,22 @@ class Home extends StatelessWidget {
                 ),
                 const SizedBox(height: 32),
                 ElevatedButton(
-                  onPressed: () {
-                    // TODO: Implémenter la connexion avec Google
+                  onPressed: () async {
+                    try{
+                      UserCredential? userCredential = await signInWithGoogle();
+                      User? user = userCredential.user;
+                      if( user != null) {
+                        print("User Credential ${userCredential.toString()}");
+                        _showToast("Connexion reussie: ${user.email}");
+                        Navigator.push(
+                          context,
+                          MaterialPageRoute(builder: (context) => ProjetListScreen()),
+                        );
+                      }
+                    }catch(e){
+                      print("Error-exception: ${e.toString()}");
+                    }
+
                   },
                   style: ElevatedButton.styleFrom(
                     backgroundColor: Colors.grey[200],
@@ -67,12 +104,15 @@ class Home extends StatelessWidget {
                 const SizedBox(height: 16),
                 TextButton(
                   onPressed: () {
-                    // TODO: Naviguer vers la page de connexion par email
+                    Navigator.push(
+                      context,
+                      MaterialPageRoute(builder: (context) => LandingPage()),
+                    );
                   },
                   child: const Text(
                     'Ou continuer avec un mail',
                     style: TextStyle(
-                      color: Colors.white, // Couleur du texte pour le fond
+                      color: Colors.grey, // Couleur du texte pour le fond
                       fontSize: 12,
                       fontFamily: 'Inter',
                       fontWeight: FontWeight.w600,
@@ -87,4 +127,17 @@ class Home extends StatelessWidget {
       ),
     );
   }
+  void _showToast(String msg) {
+    Fluttertoast.showToast(
+      msg: msg,
+      toastLength: Toast.LENGTH_SHORT, // Durée d'affichage
+      gravity: ToastGravity.BOTTOM, // Position du Toast
+      backgroundColor: Colors.grey[800], // Couleur de fond (optionnel)
+      textColor: Colors.white, // Couleur du texte (optionnel)
+      fontSize: 16.0, // Taille de la police (optionnel)
+    );
+  }
+
 }
+
+

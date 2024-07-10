@@ -1,14 +1,14 @@
 import 'package:flutter/material.dart';
 
-class MyBottomNavbar extends StatefulWidget {
-  const MyBottomNavbar({super.key});
+class MyBottomNavbar extends StatelessWidget { // StatelessWidget ici
+  final int selectedIndex;
+  final ValueChanged<int> onTap;
 
-  @override
-  State<MyBottomNavbar> createState() => _MyBottomNavbarState();
-}
-
-class _MyBottomNavbarState extends State<MyBottomNavbar> {
-  int selectedIndex = 0;
+  const MyBottomNavbar({
+    Key? key,
+    required this.selectedIndex,
+    required this.onTap,
+  }) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
@@ -16,16 +16,11 @@ class _MyBottomNavbarState extends State<MyBottomNavbar> {
       currentIndex: selectedIndex,
       selectedItemColor: Colors.orange,
       unselectedItemColor: Colors.grey,
-      onTap: (index) {
-        setState(() {
-          selectedIndex = index;
-        });
-      },
-      // Solution : Surcharger le thème par défaut
-      type: BottomNavigationBarType.fixed, // Important pour les thèmes personnalisés
+      onTap: onTap,
+      type: BottomNavigationBarType.fixed,
       selectedLabelStyle: const TextStyle(color: Colors.orange),
       unselectedLabelStyle: const TextStyle(color: Colors.grey),
-      backgroundColor: Colors.white, // Couleur de fond blanche
+      backgroundColor: Colors.white,
       items: const [
         BottomNavigationBarItem(
           icon: Icon(Icons.home),

@@ -1,13 +1,14 @@
 import 'package:flutter/material.dart';
+import 'package:projet_flutter/liste_de_projet.dart';
 
-class Acceuil extends StatefulWidget {
-  const Acceuil({Key? key}) : super(key: key);
+class LandingPage extends StatefulWidget {
+  const LandingPage({Key? key}) : super(key: key);
 
   @override
-  _AcceuilState createState() => _AcceuilState();
+  _LandingPageState createState() => _LandingPageState();
 }
 
-class _AcceuilState extends State<Acceuil> {
+class _LandingPageState extends State<LandingPage> {
   bool _obscureText = true;
   String? selectedUserType; // Pour stocker le type d'utilisateur sélectionné
 
@@ -117,7 +118,11 @@ class _AcceuilState extends State<Acceuil> {
   Widget _buildContinueButton() {
     return ElevatedButton(
       onPressed: () {
-        // TODO: Implémenter la logique de connexion
+        Navigator.push(
+          context,
+          MaterialPageRoute(builder: (context) => ProjetListScreen()),
+        );
+
       },
       style: ElevatedButton.styleFrom(
         backgroundColor: const Color(0xB7C36107),

@@ -5,6 +5,7 @@ import 'firebase_options.dart';
 import 'home.dart';
 
 Future<void> main() async {
+  WidgetsFlutterBinding.ensureInitialized();
   await Firebase.initializeApp(
     options: DefaultFirebaseOptions.currentPlatform,
   );
@@ -13,17 +14,12 @@ Future<void> main() async {
 
 class MyApp extends StatelessWidget {
   const MyApp({super.key});
-
   @override
   Widget build(BuildContext context) {
-    return MaterialApp(
-      theme: ThemeData.dark().copyWith(
-        scaffoldBackgroundColor: const Color.fromARGB(255, 18, 32, 47),
-      ),
+    return  MaterialApp(
+      debugShowCheckedModeBanner: false,
       home: Scaffold(
-        body: ListView(children: [
-          Home(),
-        ]),
+        body: Home(),
       ),
     );
   }

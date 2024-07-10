@@ -1,170 +1,113 @@
 import 'package:flutter/material.dart';
-class ChatScreen extends StatelessWidget {
+
+class ChatScreen extends StatefulWidget {
+  const ChatScreen({Key? key}) : super(key: key);
+
+  @override
+  State<ChatScreen> createState() => _ChatScreenState();
+}
+
+class _ChatScreenState extends State<ChatScreen> {
+  final TextEditingController _messageController = TextEditingController();
+
+  @override
+  void dispose() {
+    _messageController.dispose();
+    super.dispose();
+  }
+
   @override
   Widget build(BuildContext context) {
-    return Column(
-      children: [
-        Container(
-          width: 360,
-          height: 800,
-          decoration: BoxDecoration(color: Colors.white),
-          child: Stack(
-            children: [
-              Positioned(
-                left: 126,
-                top: 17,
-                child: Text(
-                  'Equipe',
-                  style: TextStyle(
-                    color: Colors.black,
-                    fontSize: 20,
-                    fontFamily: 'Inter',
-                    fontWeight: FontWeight.w600,
-                    height: 0,
-                  ),
-                ),
-              ),
-              Positioned(
-                left: 59,
-                top: 722,
-                child: Container(
-                  width: 242,
-                  height: 43,
-                  decoration: ShapeDecoration(
-                    color: Color(0xFFF5F5F5),
-                    shape: RoundedRectangleBorder(
-                      borderRadius: BorderRadius.circular(10),
-                    ),
-                  ),
-                ),
-              ),
-              Positioned(
-                left: 104,
-                top: 53,
-                child: Text(
-                  'Details du groupe ',
-                  style: TextStyle(
-                    color: Color(0xFF918F8F),
-                    fontSize: 15,
-                    fontFamily: 'Inter',
-                    fontWeight: FontWeight.w700,
-                    height: 0,
-                  ),
-                ),
-              ),
-              Positioned(
-                left: 72,
-                top: 729,
-                child: Text(
-                  'Message',
-                  style: TextStyle(
-                    color: Color(0xFF918F8F),
-                    fontSize: 24,
-                    fontFamily: 'Inter',
-                    fontWeight: FontWeight.w700,
-                    height: 0,
-                  ),
-                ),
-              ),
-              Positioned(
-                left: 129,
-                top: 83,
-                child: Text(
-                  'Aujourdui',
-                  style: TextStyle(
-                    color: Color(0xFF918F8F),
-                    fontSize: 15,
-                    fontFamily: 'Inter',
-                    fontWeight: FontWeight.w700,
-                    height: 0,
-                  ),
-                ),
-              ),
-              Positioned(
-                left: 270,
-                top: 94,
-                child: Text(
-                  '09:39',
-                  style: TextStyle(
-                    color: Color(0xFF918F8F),
-                    fontSize: 14,
-                    fontFamily: 'Inter',
-                    fontWeight: FontWeight.w700,
-                    height: 0,
-                  ),
-                ),
-              ),
-              Positioned(
-                left: 0,
-                top: 703,
-                child: Container(
-                  width: 360.02,
-                  decoration: ShapeDecoration(
-                    shape: RoundedRectangleBorder(
-                      side: BorderSide(
-                        width: 1,
-                        strokeAlign: BorderSide.strokeAlignCenter,
-                        color: Color(0xFFD9D9D9),
-                      ),
-                    ),
-                  ),
-                ),
-              ),
-              Positioned(
-                left: 330,
-                top: 177,
-                child: Container(
-                  width: 14,
-                  height: 14,
-                  decoration: ShapeDecoration(
-                    color: Colors.white,
-                    shape: OvalBorder(side: BorderSide(width: 1)),
-                  ),
-                ),
-              ),
-              Positioned(
-                left: 283,
-                top: 138,
-                child: Text(
-                  'Hi',
-                  style: TextStyle(
-                    color: Colors.white,
-                    fontSize: 32,
-                    fontFamily: 'Inter',
-                    fontWeight: FontWeight.w700,
-                    height: 0,
-                  ),
-                ),
-              ),
-              Positioned(
-                left: 14,
-                top: 732,
-                child: Container(
-                  width: 20,
-                  height: 20,
-                  decoration: BoxDecoration(color: Color(0xFF918F8F)),
-                  child: FlutterLogo(),
-                ),
-              ),
-              Positioned(
-                left: 259,
-                top: 730,
-                child: Container(
-                  width: 23,
-                  height: 23,
-                  padding: const EdgeInsets.all(6),
-                  decoration: ShapeDecoration(
-                    color: Color(0xFF918F8F),
-                    shape: RoundedRectangleBorder(
-                      borderRadius: BorderRadius.circular(25),
-                    ),
-                  ),
-                ),
-              ),
-            ],
+    return Scaffold(
+      backgroundColor: Colors.white,
+      appBar: AppBar(
+        title: const Center(
+          child: Text(
+            'Equipe',
+            style: TextStyle(
+              color: Colors.black,
+              fontSize: 20,
+              fontFamily: 'Inter',
+              fontWeight: FontWeight.w600,
+            ),
           ),
         ),
-      ],
+        backgroundColor: Colors.white,
+        elevation: 0,
+      ),
+      body: Column(
+        children: [
+          Expanded(
+            child: ListView.builder(
+              reverse: true,
+              itemCount: 10,
+              itemBuilder: (context, index) {
+                return _buildMessageItem(isMe: index % 2 == 0);
+              },
+            ),
+          ),
+          _buildMessageInput(),
+        ],
+      ),
+    );
+  }
+
+  Widget _buildMessageItem({required bool isMe}) {
+    return Align(
+      alignment: isMe ? Alignment.centerRight : Alignment.centerLeft,
+      child: Container(
+        margin: const EdgeInsets.symmetric(vertical: 8.0, horizontal: 16.0),
+        padding: const EdgeInsets.all(12.0),
+        constraints: BoxConstraints(
+          maxWidth: MediaQuery.of(context).size.width * 0.8,
+        ),
+        decoration: BoxDecoration(
+          color: isMe ? const Color(0xFF918F8F) : Colors.grey[300],
+          borderRadius: BorderRadius.circular(16.0),
+        ),
+        child: Text(
+          'Exemple de message',
+          style: TextStyle(
+            color: isMe ? Colors.white : Colors.black,
+            fontSize: 16,
+          ),
+        ),
+      ),
+    );
+  }
+
+  Widget _buildMessageInput() {
+    return Container(
+      padding: const EdgeInsets.symmetric(horizontal: 16.0, vertical: 8.0),
+      decoration: BoxDecoration(
+        color: Colors.grey[200],
+        border: Border(
+          top: BorderSide(color: Colors.grey[300]!),
+        ),
+      ),
+      child: Row(
+        children: [
+          Expanded(
+            child: TextField(
+              controller: _messageController,
+              decoration: const InputDecoration(
+                hintText: 'Message',
+                border: InputBorder.none,
+              ),
+            ),
+          ),
+          IconButton(
+            onPressed: () {
+              String message = _messageController.text.trim();
+              if (message.isNotEmpty) {
+                print('Envoi du message : $message');
+                _messageController.clear();
+              }
+            },
+            icon: const Icon(Icons.send, color: Colors.orange),
+          ),
+        ],
+      ),
     );
   }
 }
