@@ -15,22 +15,34 @@ class Home extends StatefulWidget {
 }
 
 class _HomeState extends State<Home> {
+  bool _isLoading = false; // Ajout d'un état pour la barre de chargement
 
   Future<UserCredential> signInWithGoogle() async {
-    // Trigger the authentication flow
-    final GoogleSignInAccount? googleUser = await GoogleSignIn().signIn();
+    setState(() {
+      _isLoading = true; // Afficher la barre de chargement
+    });
 
-    // Obtain the auth details from the request
-    final GoogleSignInAuthentication? googleAuth = await googleUser?.authentication;
+    try {
+      // Trigger the authentication flow
+      final GoogleSignInAccount? googleUser = await GoogleSignIn().signIn();
 
-    // Create a new credential
-    final credential = GoogleAuthProvider.credential(
-      accessToken: googleAuth?.accessToken,
-      idToken: googleAuth?.idToken,
-    );
+      // Obtain the auth details from the request
+      final GoogleSignInAuthentication? googleAuth =
+      await googleUser?.authentication;
 
-    // Once signed in, return the UserCredential
-    return await FirebaseAuth.instance.signInWithCredential(credential);
+      // Create a new credential
+      final credential = GoogleAuthProvider.credential(
+        accessToken: googleAuth?.accessToken,
+        idToken: googleAuth?.idToken,
+      );
+
+      // Once signed in, return the UserCredential
+      return await FirebaseAuth.instance.signInWithCredential(credential);
+    } finally {
+      setState(() {
+        _isLoading = false; // Cacher la barre de chargement
+      });
+    }
   }
 
   @override
@@ -67,21 +79,22 @@ class _HomeState extends State<Home> {
                 const SizedBox(height: 32),
                 ElevatedButton(
                   onPressed: () async {
-                    try{
-                      UserCredential? userCredential = await signInWithGoogle();
+                    try {
+                      UserCredential? userCredential =
+                      await signInWithGoogle();
                       User? user = userCredential.user;
-                      if( user != null) {
+                      if (user != null) {
                         print("User Credential ${userCredential.toString()}");
                         _showToast("Connexion reussie: ${user.email}");
                         Navigator.push(
                           context,
-                          MaterialPageRoute(builder: (context) => ProjetListScreen()),
+                          MaterialPageRoute(
+                              builder: (context) => ProjetListScreen()),
                         );
                       }
-                    }catch(e){
+                    } catch (e) {
                       print("Error-exception: ${e.toString()}");
                     }
-
                   },
                   style: ElevatedButton.styleFrom(
                     backgroundColor: Colors.grey[200],
@@ -106,7 +119,8 @@ class _HomeState extends State<Home> {
                   onPressed: () {
                     Navigator.push(
                       context,
-                      MaterialPageRoute(builder: (context) => LandingPage()),
+                      MaterialPageRoute(
+                          builder: (context) => LandingPage()),
                     );
                   },
                   child: const Text(
@@ -123,10 +137,19 @@ class _HomeState extends State<Home> {
               ],
             ),
           ),
+          // Barre de chargement superposée
+          if (_isLoading)
+            Container(
+              color: Colors.black.withOpacity(0.5),
+              child: const Center(
+                child: CircularProgressIndicator(),
+              ),
+            ),
         ],
       ),
     );
   }
+
   void _showToast(String msg) {
     Fluttertoast.showToast(
       msg: msg,
@@ -137,7 +160,4 @@ class _HomeState extends State<Home> {
       fontSize: 16.0, // Taille de la police (optionnel)
     );
   }
-
 }
-
-
