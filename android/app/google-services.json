@@ -1,0 +1,39 @@
+{
+  "project_info": {
+    "project_number": "434788203531",
+    "project_id": "chantier-e7c60",
+    "storage_bucket": "chantier-e7c60.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:434788203531:android:e7f87f0dbbddd618369b0e",
+        "android_client_info": {
+          "package_name": "com.example.projet_flutter"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "434788203531-dvsgj6sa47nnajt0qgp4hjelfnio1avl.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyDF9egtyqSN0in132Lazb_FTzA9XOLtIpk"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "434788203531-dvsgj6sa47nnajt0qgp4hjelfnio1avl.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}

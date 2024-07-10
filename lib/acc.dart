@@ -1,417 +1,138 @@
 import 'package:flutter/material.dart';
-class Acceuil extends StatelessWidget {
+
+class Acceuil extends StatefulWidget {
+  const Acceuil({Key? key}) : super(key: key);
+
+  @override
+  _AcceuilState createState() => _AcceuilState();
+}
+
+class _AcceuilState extends State<Acceuil> {
+  bool _obscureText = true;
+  String? selectedUserType; // Pour stocker le type d'utilisateur sélectionné
+
   @override
   Widget build(BuildContext context) {
-    return Column(
-      children: [
-        Container(
-          width: 360,
-          height: 800,
-          decoration: BoxDecoration(color: Colors.white),
-          child: Stack(
-            children: [
-              Positioned(
-                left: 68,
-                top: 29,
-                child: Text(
-                  'Inscription',
-                  textAlign: TextAlign.center,
-                  style: TextStyle(
-                    color: Colors.black,
-                    fontSize: 40,
-                    fontFamily: 'Inter',
-                    fontWeight: FontWeight.w600,
-                    height: 0,
-                  ),
+    return Scaffold(
+      body: SingleChildScrollView(
+        child: Container(
+          padding: const EdgeInsets.all(20.0),
+          width: double.infinity,
+          child: Column(
+            crossAxisAlignment: CrossAxisAlignment.center,
+            children: <Widget>[
+              const SizedBox(height: 50),
+              const Text(
+                'Inscription',
+                style: TextStyle(
+                  fontSize: 30,
+                  fontWeight: FontWeight.bold,
                 ),
               ),
-              Positioned(
-                left: 21,
-                top: 106,
-                child: Container(
-                  width: 319,
-                  height: 382,
-                  clipBehavior: Clip.antiAlias,
-                  decoration: BoxDecoration(),
-                  child: Stack(
-                    children: [
-                      Positioned(
-                        left: 7,
-                        top: 36,
-                        child: Container(
-                          width: 300,
-                          height: 111,
-                          clipBehavior: Clip.antiAlias,
-                          decoration: BoxDecoration(),
-                          child: Stack(
-                            children: [
-                              Positioned(
-                                left: 6,
-                                top: 0,
-                                child: Container(
-                                  width: 277,
-                                  height: 82,
-                                  clipBehavior: Clip.antiAlias,
-                                  decoration: BoxDecoration(),
-                                ),
-                              ),
-                              Positioned(
-                                left: 6,
-                                top: 14,
-                                child: Container(
-                                  width: 294,
-                                  height: 83,
-                                  clipBehavior: Clip.antiAlias,
-                                  decoration: BoxDecoration(),
-                                  child: Stack(
-                                    children: [
-                                      Positioned(
-                                        left: 0,
-                                        top: 42,
-                                        child: Container(
-                                          width: 294,
-                                          height: 34,
-                                          decoration: ShapeDecoration(
-                                            color: Color(0xFFF5F5F5),
-                                            shape: RoundedRectangleBorder(
-                                              borderRadius: BorderRadius.circular(25),
-                                            ),
-                                          ),
-                                        ),
-                                      ),
-                                      Positioned(
-                                        left: 15,
-                                        top: 8,
-                                        child: Text(
-                                          'Prenom',
-                                          style: TextStyle(
-                                            color: Colors.black.withOpacity(0.33000001311302185),
-                                            fontSize: 18,
-                                            fontFamily: 'Inter',
-                                            fontWeight: FontWeight.w600,
-                                            height: 0,
-                                          ),
-                                        ),
-                                      ),
-                                      Positioned(
-                                        left: 15,
-                                        top: 48,
-                                        child: Text(
-                                          'Entrez votre prenom',
-                                          style: TextStyle(
-                                            color: Colors.black.withOpacity(0.4099999964237213),
-                                            fontSize: 18,
-                                            fontFamily: 'Inter',
-                                            fontWeight: FontWeight.w600,
-                                            height: 0,
-                                          ),
-                                        ),
-                                      ),
-                                    ],
-                                  ),
-                                ),
-                              ),
-                            ],
-                          ),
-                        ),
-                      ),
-                      Positioned(
-                        left: 7,
-                        top: 133,
-                        child: Container(
-                          width: 300,
-                          height: 83,
-                          clipBehavior: Clip.antiAlias,
-                          decoration: BoxDecoration(),
-                          child: Stack(
-                            children: [
-                              Positioned(
-                                left: 0,
-                                top: 42,
-                                child: Container(
-                                  width: 300,
-                                  height: 34,
-                                  decoration: ShapeDecoration(
-                                    color: Color(0xFFF5F5F5),
-                                    shape: RoundedRectangleBorder(
-                                      borderRadius: BorderRadius.circular(25),
-                                    ),
-                                  ),
-                                ),
-                              ),
-                              Positioned(
-                                left: 15,
-                                top: 8,
-                                child: Text(
-                                  'Nom',
-                                  style: TextStyle(
-                                    color: Colors.black.withOpacity(0.33000001311302185),
-                                    fontSize: 18,
-                                    fontFamily: 'Inter',
-                                    fontWeight: FontWeight.w600,
-                                    height: 0,
-                                  ),
-                                ),
-                              ),
-                              Positioned(
-                                left: 25,
-                                top: 48,
-                                child: Text(
-                                  'Entrez votre nom',
-                                  style: TextStyle(
-                                    color: Colors.black.withOpacity(0.4099999964237213),
-                                    fontSize: 18,
-                                    fontFamily: 'Inter',
-                                    fontWeight: FontWeight.w600,
-                                    height: 0,
-                                  ),
-                                ),
-                              ),
-                            ],
-                          ),
-                        ),
-                      ),
-                      Positioned(
-                        left: 7,
-                        top: 216,
-                        child: Container(
-                          width: 300,
-                          height: 83,
-                          clipBehavior: Clip.antiAlias,
-                          decoration: BoxDecoration(),
-                          child: Stack(
-                            children: [
-                              Positioned(
-                                left: 0,
-                                top: 42,
-                                child: Container(
-                                  width: 300,
-                                  height: 34,
-                                  decoration: ShapeDecoration(
-                                    color: Color(0xFFF5F5F5),
-                                    shape: RoundedRectangleBorder(
-                                      borderRadius: BorderRadius.circular(25),
-                                    ),
-                                  ),
-                                ),
-                              ),
-                              Positioned(
-                                left: 15,
-                                top: 8,
-                                child: Text(
-                                  'E-mail',
-                                  style: TextStyle(
-                                    color: Colors.black.withOpacity(0.33000001311302185),
-                                    fontSize: 18,
-                                    fontFamily: 'Inter',
-                                    fontWeight: FontWeight.w600,
-                                    height: 0,
-                                  ),
-                                ),
-                              ),
-                              Positioned(
-                                left: 17,
-                                top: 48,
-                                child: Text(
-                                  'ernesterdragnell1@gmail.com',
-                                  style: TextStyle(
-                                    color: Colors.black.withOpacity(0.4099999964237213),
-                                    fontSize: 18,
-                                    fontFamily: 'Inter',
-                                    fontWeight: FontWeight.w600,
-                                    height: 0,
-                                  ),
-                                ),
-                              ),
-                            ],
-                          ),
-                        ),
-                      ),
-                      Positioned(
-                        left: 0,
-                        top: 299,
-                        child: Container(
-                          width: 300,
-                          height: 83,
-                          clipBehavior: Clip.antiAlias,
-                          decoration: BoxDecoration(),
-                          child: Stack(
-                            children: [
-                              Positioned(
-                                left: 0,
-                                top: 42,
-                                child: Container(
-                                  width: 300,
-                                  height: 34,
-                                  decoration: ShapeDecoration(
-                                    color: Color(0xFFF5F5F5),
-                                    shape: RoundedRectangleBorder(
-                                      borderRadius: BorderRadius.circular(25),
-                                    ),
-                                  ),
-                                ),
-                              ),
-                              Positioned(
-                                left: 15,
-                                top: 8,
-                                child: Text(
-                                  'Mot de passe',
-                                  style: TextStyle(
-                                    color: Colors.black.withOpacity(0.33000001311302185),
-                                    fontSize: 18,
-                                    fontFamily: 'Inter',
-                                    fontWeight: FontWeight.w600,
-                                    height: 0,
-                                  ),
-                                ),
-                              ),
-                              Positioned(
-                                left: 19,
-                                top: 48,
-                                child: Text(
-                                  'Entrez votre mot de passe',
-                                  style: TextStyle(
-                                    color: Colors.black.withOpacity(0.4099999964237213),
-                                    fontSize: 18,
-                                    fontFamily: 'Inter',
-                                    fontWeight: FontWeight.w600,
-                                    height: 0,
-                                  ),
-                                ),
-                              ),
-                            ],
-                          ),
-                        ),
-                      ),
-                    ],
-                  ),
+              const SizedBox(height: 20),
+              _buildUserTypeSelection(), // Sélection du type d'utilisateur
+              const SizedBox(height: 20),
+              _buildTextField('Prenom', false),
+              const SizedBox(height: 20),
+              _buildTextField('Nom', false),
+              const SizedBox(height: 20),
+              _buildTextField('E-mail', false),
+              const SizedBox(height: 20),
+              _buildTextField('Mot de passe', true),
+              const SizedBox(height: 10),
+              const Text(
+                '8 caractères minimum avec au moins 1 majuscule, 1 minuscule et 1 chiffre',
+                textAlign: TextAlign.center,
+                style: TextStyle(
+                  fontSize: 12,
+                  color: Colors.grey,
                 ),
               ),
-              Positioned(
-                left: 42,
-                top: 488,
-                child: Text.rich(
-                  TextSpan(
-                    children: [
-                      TextSpan(
-                        text: '8 caracteres ',
-                        style: TextStyle(
-                          color: Color(0xFFC33407),
-                          fontSize: 11,
-                          fontFamily: 'Inter',
-                          fontWeight: FontWeight.w600,
-                          height: 0,
-                        ),
-                      ),
-                      TextSpan(
-                        text: 'minimum avec au moins',
-                        style: TextStyle(
-                          color: Colors.black.withOpacity(0.75),
-                          fontSize: 11,
-                          fontFamily: 'Inter',
-                          fontWeight: FontWeight.w600,
-                          height: 0,
-                        ),
-                      ),
-                      TextSpan(
-                        text: ' 1 majuscule, 1\n miniscue et 1 chiffre',
-                        style: TextStyle(
-                          color: Color(0xFFB62F05),
-                          fontSize: 11,
-                          fontFamily: 'Inter',
-                          fontWeight: FontWeight.w600,
-                          height: 0,
-                        ),
-                      ),
-                    ],
-                  ),
-                ),
-              ),
-              Positioned(
-                left: 45,
-                top: 585,
-                child: Text.rich(
-                  TextSpan(
-                    children: [
-                      TextSpan(
-                        text: 'j’ai lu et j’accepte ',
-                        style: TextStyle(
-                          color: Color(0xFF918F8F),
-                          fontSize: 12,
-                          fontFamily: 'Inter',
-                          fontWeight: FontWeight.w600,
-                          height: 0,
-                        ),
-                      ),
-                      TextSpan(
-                        text: 'les Conditions Generales ',
-                        style: TextStyle(
-                          color: Colors.black.withOpacity(0.7900000214576721),
-                          fontSize: 12,
-                          fontFamily: 'Inter',
-                          fontWeight: FontWeight.w600,
-                          height: 0,
-                        ),
-                      ),
-                      TextSpan(
-                        text: 'et la\n',
-                        style: TextStyle(
-                          color: Color(0xFF918F8F),
-                          fontSize: 12,
-                          fontFamily: 'Inter',
-                          fontWeight: FontWeight.w600,
-                          height: 0,
-                        ),
-                      ),
-                      TextSpan(
-                        text: ' Politique de Confidentiallite',
-                        style: TextStyle(
-                          color: Colors.black.withOpacity(0.7900000214576721),
-                          fontSize: 12,
-                          fontFamily: 'Inter',
-                          fontWeight: FontWeight.w600,
-                          height: 0,
-                        ),
-                      ),
-                    ],
-                  ),
-                ),
-              ),
-              Positioned(
-                left: 104,
-                top: 670,
-                child: Container(
-                  width: 135,
-                  height: 27,
-                  decoration: ShapeDecoration(
-                    color: Color(0xB7C36107),
-                    shape: RoundedRectangleBorder(
-                      borderRadius: BorderRadius.circular(25),
-                    ),
-                  ),
-                ),
-              ),
-              Positioned(
-                left: 141,
-                top: 675,
-                child: SizedBox(
-                  width: 79,
-                  child: Text(
-                    'Continuer',
-                    style: TextStyle(
-                      color: Color(0xFFF5F5F5),
-                      fontSize: 14,
-                      fontFamily: 'Inter',
-                      fontWeight: FontWeight.w600,
-                      height: 0,
-                    ),
-                  ),
-                ),
-              ),
+              const SizedBox(height: 20),
+              _buildContinueButton(),
+              const SizedBox(height: 30),
             ],
           ),
         ),
+      ),
+    );
+  }
+
+  // Widget pour sélectionner le type d'utilisateur
+  Widget _buildUserTypeSelection() {
+    return Row(
+      mainAxisAlignment: MainAxisAlignment.center,
+      children: <Widget>[
+        _buildUserTypeButton('Client'),
+        const SizedBox(width: 20),
+        _buildUserTypeButton('Entreprise'),
       ],
+    );
+  }
+
+  // Widget pour chaque bouton de type d'utilisateur
+  Widget _buildUserTypeButton(String userType) {
+    return ElevatedButton(
+      onPressed: () {
+        setState(() {
+          selectedUserType = userType;
+        });
+      },
+      style: ElevatedButton.styleFrom(
+        backgroundColor: selectedUserType == userType
+            ? const Color(0xB7C36107)
+            : Colors.grey[300],
+        padding: const EdgeInsets.symmetric(horizontal: 30, vertical: 12),
+        shape: RoundedRectangleBorder(
+          borderRadius: BorderRadius.circular(25),
+        ),
+      ),
+      child: Text(
+        userType,
+        style: TextStyle(
+          color: selectedUserType == userType ? Colors.white : Colors.black,
+          fontSize: 14,
+        ),
+      ),
+    );
+  }
+
+  Widget _buildTextField(String hintText, bool isPassword) {
+    return TextField(
+      obscureText: isPassword ? _obscureText : false,
+      decoration: InputDecoration(
+        hintText: hintText,
+        border: OutlineInputBorder(
+          borderRadius: BorderRadius.circular(25.0),
+          borderSide: BorderSide.none,
+        ),
+        filled: true,
+        fillColor: Colors.grey[200],
+        contentPadding:
+        const EdgeInsets.symmetric(horizontal: 20, vertical: 18),
+      ),
+    );
+  }
+
+  Widget _buildContinueButton() {
+    return ElevatedButton(
+      onPressed: () {
+        // TODO: Implémenter la logique de connexion
+      },
+      style: ElevatedButton.styleFrom(
+        backgroundColor: const Color(0xB7C36107),
+        padding: const EdgeInsets.symmetric(horizontal: 50, vertical: 15),
+        shape: RoundedRectangleBorder(
+          borderRadius: BorderRadius.circular(25),
+        ),
+      ),
+      child: const Text(
+        'Continuer',
+        style: TextStyle(
+          color: Colors.white,
+          fontSize: 16,
+        ),
+      ),
     );
   }
 }
